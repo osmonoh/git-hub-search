@@ -21,6 +21,10 @@ const Search = () => {
 
   console.log(repos);
 
+  fetch("https://api.github.com/repos/dci-pawple/pawfect-frontend/git/commits")
+    .then((res) => res.json())
+    .then((data) => console.log(data));
+
   return (
     <div>
       <form onSubmit={(e) => onFormSubmit(e)}>
@@ -34,7 +38,23 @@ const Search = () => {
       </form>
       <div>
         {repos.map((item) => {
-          return <p>{item.name}</p>;
+          return (
+            <div>
+              <p>repo: {item.name}</p>
+              <p>owner: {item.owner.login}</p>
+              <p>{item.owner.url}</p>
+              <p>langs: {item.languages_url}</p>
+              <p>
+                <span>stars: {item.stargazers_count}</span>
+                <span> watchers: {item.watchers}</span>
+                <span> forks: {item.forks_count}</span>
+                <span> open issues: {item.open_issues_count}</span>
+              </p>
+              <p>updated at: {item.updated_at}</p>
+              <p>contributors: {item.contributors_url}</p>
+              <img src={item.owner.avatar_url} alt="" />
+            </div>
+          );
         })}
       </div>
     </div>
