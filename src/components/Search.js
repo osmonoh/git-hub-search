@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 import gitHub from "../api/gitHub";
 
 const Search = () => {
   const [term, setTerm] = useState("");
 
   const [repos, setRepos] = useState([]);
+  const [count, setCount] = useState(0);
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
@@ -17,13 +20,14 @@ const Search = () => {
 
     // console.log(response.data.items, response.data.total_count);
     setRepos(response.data.items);
+    setCount(response.data.total_count);
   };
 
   console.log(repos);
 
-  fetch("https://api.github.com/repos/dci-pawple/pawfect-frontend/git/commits")
-    .then((res) => res.json())
-    .then((data) => console.log(data));
+  // fetch("https://api.github.com/repos/dci-pawple/pawfect-frontend/git/commits")
+  //   .then((res) => res.json())
+  //   .then((data) => console.log(data));
 
   return (
     <div>
@@ -36,10 +40,11 @@ const Search = () => {
           onChange={(e) => setTerm(e.target.value)}
         />
       </form>
+      <p>Number of results: {count}</p>
       <div>
         {repos.map((item) => {
           return (
-            <div>
+            <div key={item.id}>
               <p>repo: {item.name}</p>
               <p>owner: {item.owner.login}</p>
               <p>{item.owner.url}</p>
@@ -52,7 +57,9 @@ const Search = () => {
               </p>
               <p>updated at: {item.updated_at}</p>
               <p>contributors: {item.contributors_url}</p>
-              <img src={item.owner.avatar_url} alt="" />
+              <Link to={`/account/${item.owner.login}`}>
+                <img src={item.owner.avatar_url} alt="" />
+              </Link>
             </div>
           );
         })}

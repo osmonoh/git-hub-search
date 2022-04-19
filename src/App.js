@@ -1,5 +1,8 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Search from "./components/Search";
+import AccountDetails from "./components/AccountDetails";
 
 const App = () => {
   //   fetch("https://api.github.com/")
@@ -10,7 +13,12 @@ const App = () => {
 
   return (
     <div>
-      <Search />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Search />} />
+          <Route path="/account/:id" element={<AccountDetails />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 };
