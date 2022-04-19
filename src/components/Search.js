@@ -9,6 +9,7 @@ const Search = () => {
 
   const { repos, setRepos } = useContext(MyContext);
   const { count, setCount } = useContext(MyContext);
+  const { setAccount } = useContext(MyContext);
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +30,13 @@ const Search = () => {
   // fetch("https://api.github.com/repos/dci-pawple/pawfect-frontend/git/commits")
   //   .then((res) => res.json())
   //   .then((data) => console.log(data));
+
+  const onRepoClick = async (owner) => {
+    const response = await gitHub.get(`/users/${owner}`);
+
+    console.log(response);
+    setAccount(response.data);
+  };
 
   return (
     <div>
@@ -58,7 +66,10 @@ const Search = () => {
               </p>
               <p>updated at: {item.updated_at}</p>
               <p>contributors: {item.contributors_url}</p>
-              <Link to={`/account/${item.owner.login}`}>
+              <Link
+                to={`/account/${item.owner.login}`}
+                onClick={() => onRepoClick(item.owner.login)}
+              >
                 <img src={item.owner.avatar_url} alt="" />
               </Link>
             </div>
