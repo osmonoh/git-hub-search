@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Context from "./context/Context";
 
 import Search from "./components/Search";
 import AccountDetails from "./components/AccountDetails";
@@ -13,12 +14,14 @@ const App = () => {
 
   return (
     <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Search />} />
-          <Route path="/account/:id" element={<AccountDetails />} />
-        </Routes>
-      </BrowserRouter>
+      <Context>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Search />} />
+            <Route path="/account/:id" element={<AccountDetails />} />
+          </Routes>
+        </BrowserRouter>
+      </Context>
     </div>
   );
 };

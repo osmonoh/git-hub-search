@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { MyContext } from "../context/MyContext";
 
 import gitHub from "../api/gitHub";
 
 const Search = () => {
   const [term, setTerm] = useState("");
 
-  const [repos, setRepos] = useState([]);
-  const [count, setCount] = useState(0);
+  const { repos, setRepos } = useContext(MyContext);
+  const { count, setCount } = useContext(MyContext);
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
