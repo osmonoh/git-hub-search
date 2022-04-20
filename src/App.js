@@ -2,8 +2,11 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Context from "./context/Context";
 
-import Search from "./components/Search";
+import Home from "./components/Home";
+import SearchResults from "./components/SearchResults";
 import AccountDetails from "./components/AccountDetails";
+
+import "./style/style.css";
 
 const App = () => {
   //   fetch("https://api.github.com/")
@@ -13,11 +16,12 @@ const App = () => {
   //     .then((data) => console.log(data));
 
   return (
-    <div>
+    <div className="App">
       <Context>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Search />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/search" element={<SearchResults />} />
             <Route path="/account/:id" element={<AccountDetails />} />
           </Routes>
         </BrowserRouter>

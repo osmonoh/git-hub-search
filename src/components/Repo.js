@@ -17,7 +17,7 @@ const Repo = ({ repo }) => {
   } = repo;
 
   const [languages, setLanguages] = useState("");
-  const { setAccount } = useContext(MyContext);
+  const { account, setAccount } = useContext(MyContext);
 
   const getLanguages = async (login, repo) => {
     const response = await gitHub.get(`/repos/${login}/${repo}/languages`);
@@ -33,6 +33,7 @@ const Repo = ({ repo }) => {
 
     console.log(response.data);
     setAccount(response.data);
+    sessionStorage.setItem("account", JSON.stringify(account));
   };
 
   const getRepoQuality = () => {

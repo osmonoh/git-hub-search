@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.search {
+  padding: 20px;
+}
+
+.search-container {
+  position: relative;
+}
+
+.search-container input {
+  width: 100%;
+}
+
+.search-container button {
+  position: absolute;
+  right: 0;
+}
