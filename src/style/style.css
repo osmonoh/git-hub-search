@@ -156,12 +156,27 @@ a {
 .btn-more-results {
   display: block;
   margin: 0 auto;
-  padding: 8px 16px;
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+  border: 1px solid rgba(32, 33, 36, 0.6);
+  border-radius: 34px;
+  background-color: #ffffff;
+
+  padding: 10px 16px;
   color: inherit;
   text-transform: uppercase;
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
+}
+
+.btn-more-results:hover {
+  box-shadow: 0 2px 8px 0 rgba(32, 33, 36, 0.28);
+  background-color: rgba(32, 33, 36, 0.05);
+}
+
+.btn-more-results:active {
+  box-shadow: none;
+  background-color: rgba(32, 33, 36, 0.05);
 }
 
 /* ------------------------------ */
