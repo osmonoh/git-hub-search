@@ -1,85 +1,41 @@
 # GitHub repository search
 
-This is my solution of the Frontend coding challenge. It is a GitHub repository search.
+This is my solution of the Frontend coding challenge.
 
-It is created with create-react-app.
+It is a simple single page application called 'GitHub repository search'. It enables users to search for GitHub repositories, display the results of the search, as well as to see some details of the repository owner on a separate page.
 
-create-react-app
-axios
-react-icons
-react-router-dom
+This project is created with create-react-app and it is making use of the GitHub REST API. HTTP client Axios is used to fetch the data, Context API for state management, react-router-dom for navigation and CSS along with react-icons to style the application.
 
-vanilla css
+---
 
-context api
+On the home page there is a search field, which upon entering a search term and pressing enter redirects to the search results page, where the results (in the form of a list of repos) are displayed.
 
-# Getting Started with Create React App
+On initial search the number of displayed repos is limited to 5, however a 'More results' button is rendered (as long as there is more results to show) under the repos' list. Once this button is clicked, it triggers rendering of the next 5 results and so on, until there are no more results to show. On top of the page there is a search bar, which can be used to perform next searches if desired. After every search is performed, the total number of results is displayed. Each repo card shown in the list includes:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- name of the repository
+- owner's username and avatar
+- description
+- used languages
+- dates of creation and last update
+- quality score
 
-## Available Scripts
+Quality score is a number representing the quality of the repository. The formula to calculate the repo quality is following:
 
-In the project directory, you can run:
+(number of stars + number of watchers + number of forks) divided by (1 + time since last update + number of open issues)
 
-### `npm start`
+Once a repo card is clicked, the user is redirected to a new page with the owner's account information. This info includes user's:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- avatar
+- username
+- name
+- location
+- bio
+- github account url
+- date of account creation
+- number of followers
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+(name and location are displayed only if available, followers' number only if more than 0)
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To use the application on your machine, please clone the repository from [here](https://github.com/osmonoh/git-hub-search). Once the repo is in your computer, open the terminal, make sure you are in the right folder and run the command: `npm i`. After all the dependencies are installed you can start the application running the command: `npm start`.
