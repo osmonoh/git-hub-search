@@ -1,23 +1,57 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { MyContext } from "../context/MyContext";
+
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const AccountDetails = () => {
   const { account } = useContext(MyContext);
-  const { login, name, location, created_at, bio, followers, avatar_url } =
-    account;
+  const {
+    login,
+    name,
+    location,
+    created_at,
+    bio,
+    followers,
+    avatar_url,
+    html_url,
+  } = account;
+
+  const navigate = useNavigate();
 
   return (
-    <div>
-      <p>username: {login}</p>
-      {name && <p>name: {name}</p>}
-      {location && <p>Location: {location}</p>}
-      <p>
-        member since:{" "}
-        {created_at && created_at.split("T")[0].split("-").reverse().join("-")}
-      </p>
-      {bio && <p>bio: {bio}</p>}
-      {followers && <p>followers: {followers}</p>}
-      <img src={avatar_url} alt="" />
+    <div className="account">
+      <div className="back-arrow" onClick={() => navigate(-1)}>
+        <AiOutlineArrowLeft />
+      </div>
+      <div className="account-avatar">
+        <img src={avatar_url} alt="avatar" />
+      </div>
+      <div className="account-info">
+        <h2 className="account-info-username">{login}</h2>
+        <p className="account-info-name">{name}</p>
+        {location && <p className="account-info-location">{location}</p>}
+
+        {
+          <p className="account-info-bio">
+            {bio
+              ? bio
+              : `Unfortunately there is no bio available for this account.`}
+          </p>
+        }
+        <a className="external-link" href={html_url} target="_blank">
+          {html_url}
+        </a>
+
+        <div className="account-info-lastline">
+          <p>
+            Member since:{" "}
+            {created_at &&
+              created_at.split("T")[0].split("-").reverse().join("-")}
+          </p>
+          <p>{followers ? `Followers: ${followers}` : ""}</p>
+        </div>
+      </div>
     </div>
   );
 };

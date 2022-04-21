@@ -1,23 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MyContext } from "../context/MyContext";
-
 import gitHub from "../api/gitHub";
 
 const Repo = ({ repo }) => {
   const {
     owner,
     name,
+    created_at,
     updated_at,
     stargazers_count,
     watchers,
     forks_count,
     open_issues_count,
     description,
+    html_url,
   } = repo;
 
   const [languages, setLanguages] = useState("");
-  const { account, setAccount } = useContext(MyContext);
+  const { setAccount } = useContext(MyContext);
 
   const getLanguages = async (login, repo) => {
     const response = await gitHub.get(`/repos/${login}/${repo}/languages`);
@@ -31,9 +32,9 @@ const Repo = ({ repo }) => {
   const onRepoClick = async (owner) => {
     const response = await gitHub.get(`/users/${owner}`);
 
-    console.log(response.data);
+    console.log("response.data in Repo.js: ", response.data);
     setAccount(response.data);
-    sessionStorage.setItem("account", JSON.stringify(account));
+    sessionStorage.setItem("account", JSON.stringify(response.data));
   };
 
   const getRepoQuality = () => {
@@ -49,27 +50,48 @@ const Repo = ({ repo }) => {
   };
 
   return (
-    <div>
-      <p>repo: {name}</p>
-      <p>owner: {owner.login}</p>
-      <p>description: {description}</p>
-      <p>languages: {languages}</p>
-      <p>
-        <span>stars: {stargazers_count}</span>
-        <span> watchers: {watchers}</span>
-        <span> forks: {forks_count}</span>
-        <span> open issues: {open_issues_count}</span>
-      </p>
-      <p>
-        last update: {updated_at.split("T")[0].split("-").reverse().join("-")}
-      </p>
-      <p>repo quality: {getRepoQuality()}</p>
-      {/* <p>contributors: {item.contributors_url}</p> */}
+    <div className="repo">
       <Link
+        className="repo-link"
         to={`/account/${owner.login}`}
         onClick={() => onRepoClick(owner.login)}
       >
-        <img src={owner.avatar_url} alt="" />
+        <div className="owner-avatar">
+          <img src={owner.avatar_url} alt="owner-avatar" />
+        </div>
+
+        <div className="repo-info">
+          <div className="repo-info-firstline">
+            <h3>{name}</h3>
+            <p>Quality: {getRepoQuality()}</p>
+          </div>
+          <p className="repo-info-owner">{owner.login}</p>
+
+          <p className="repo-info-description">
+            {description
+              ? description
+              : "No description available for this repo"}
+          </p>
+          <p className="repo-info-languages">&#10148; {languages}</p>
+
+          {/* <a
+            className="external-link"
+            href={html_url}
+            target="_blank"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {html_url}
+          </a> */}
+
+          <div className="repo-info-dates">
+            <p>
+              Created: {created_at.split("T")[0].split("-").reverse().join("-")}
+            </p>
+            <p>
+              Updated: {updated_at.split("T")[0].split("-").reverse().join("-")}
+            </p>
+          </div>
+        </div>
       </Link>
     </div>
   );

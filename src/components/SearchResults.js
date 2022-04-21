@@ -1,16 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "../context/MyContext";
-
 import gitHub from "../api/gitHub";
 import Repo from "./Repo";
+
+import { GoSearch } from "react-icons/go";
+import { VscChromeClose } from "react-icons/vsc";
 
 const Search = () => {
   const [loading, setLoading] = useState(false);
   const { term, setTerm } = useContext(MyContext);
+  const { lastTerm, setLastTerm } = useContext(MyContext);
   const { repos, setRepos } = useContext(MyContext);
   const { count, setCount } = useContext(MyContext);
 
   const onPageLoad = async () => {
+    if (!term) setTerm(lastTerm);
     setLoading(true);
     const response = await gitHub.get("/search/repositories", {
       params: {
@@ -31,6 +35,8 @@ const Search = () => {
     if (term) {
       setLoading(true);
       sessionStorage.setItem("term", term);
+      sessionStorage.setItem("lastTerm", lastTerm);
+
       const response = await gitHub.get("/search/repositories", {
         params: {
           q: term,
@@ -52,13 +58,35 @@ const Search = () => {
             type="text"
             placeholder="Search"
             value={term}
-            onChange={(e) => setTerm(e.target.value)}
+            onChange={(e) => {
+              setTerm(e.target.value);
+              setLastTerm(e.target.value);
+            }}
           />
-          <button type="submit">Search</button>
+
+          <div className="buttons">
+            <button
+              className="btn-close"
+              type="reset"
+              onClick={() => setTerm("")}
+            >
+              {<VscChromeClose />}
+            </button>
+            <span>|</span>
+            <button className="btn-search" type="submit">
+              {<GoSearch />}
+            </button>
+          </div>
         </div>
+
+        <p className="results-number">
+          {loading ? `Loading...` : `${count} results`}
+        </p>
       </form>
-      <p>{loading ? `Loading...` : `Number of results: ${count}`}</p>
-      <div>
+
+      {count === 0 && <p className="no-matches">No matches were found.</p>}
+
+      <div className="repos-list">
         {repos.map((item) => {
           return <Repo repo={item} key={item.id} />;
         })}
