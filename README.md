@@ -6,7 +6,7 @@ It is a simple single page application called 'GitHub repository search'. It ena
 
 This project is created with **create-react-app** and it is making use of the **GitHub REST API**. HTTP client **Axios** is used to fetch the data, **Context API** for state management, **react-router-dom** for navigation and **CSS** along with **react-icons** to style the application. GitHub repository search is deployed on **Netlify**.
 
-You can see the live preview [here](https://git-hub-repo-search.netlify.app/).
+You can see live preview [here](https://git-hub-repo-search.netlify.app/).
 
 ---
 
