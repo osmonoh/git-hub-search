@@ -32,7 +32,6 @@ const Repo = ({ repo }) => {
   const onRepoClick = async (owner) => {
     const response = await gitHub.get(`/users/${owner}`);
 
-    console.log("response.data in Repo.js: ", response.data);
     setAccount(response.data);
     sessionStorage.setItem("account", JSON.stringify(response.data));
   };
@@ -72,7 +71,10 @@ const Repo = ({ repo }) => {
               ? description
               : "No description available for this repo"}
           </p>
-          <p className="repo-info-languages">&#10148; {languages}</p>
+          <p className="repo-info-languages">
+            &#10148;{" "}
+            {languages.length ? languages : `No computer languages detected`}
+          </p>
 
           {/* <a
             className="external-link"

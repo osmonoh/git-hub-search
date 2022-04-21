@@ -13,6 +13,9 @@ const Search = () => {
   const { repos, setRepos } = useContext(MyContext);
   const { count, setCount } = useContext(MyContext);
 
+  const [page, setPage] = useState(2);
+  const [totalPages, setTotalPages] = useState(0);
+
   const onPageLoad = async () => {
     if (!term) setTerm(lastTerm);
     setLoading(true);
@@ -23,6 +26,7 @@ const Search = () => {
     });
     setRepos(response.data.items);
     setCount(response.data.total_count);
+    setTotalPages(Math.ceil(response.data.total_count / 5));
     setLoading(false);
   };
 
@@ -44,11 +48,24 @@ const Search = () => {
       });
       setRepos(response.data.items);
       setCount(response.data.total_count);
+      setTotalPages(Math.ceil(response.data.total_count / 5));
+      setPage(2);
       setLoading(false);
     }
   };
 
-  console.log(repos);
+  const onMoreResultsClick = async () => {
+    const response = await gitHub.get("/search/repositories", {
+      params: {
+        q: term,
+        page: page,
+      },
+    });
+    setRepos([...repos, ...response.data.items]);
+    setPage(page + 1);
+  };
+
+  // console.log(repos);
 
   return (
     <div className="search">
@@ -91,6 +108,15 @@ const Search = () => {
           return <Repo repo={item} key={item.id} />;
         })}
       </div>
+
+      {page <= totalPages && (
+        <button
+          className="btn-more-results"
+          onClick={() => onMoreResultsClick()}
+        >
+          More results
+        </button>
+      )}
     </div>
   );
 };

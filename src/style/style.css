@@ -90,7 +90,7 @@ a {
 /* SEARCH RESULTS */
 
 .search {
-  padding: 40px 20px;
+  padding: 40px 20px 80px;
 }
 
 .search-form {
@@ -145,8 +145,23 @@ a {
   font-size: 2rem;
 }
 
+.repos-list {
+  margin-bottom: 8rem;
+}
+
 .repos-list > * + * {
   border-top: solid 1px #ebebeb;
+}
+
+.btn-more-results {
+  display: block;
+  margin: 0 auto;
+  padding: 8px 16px;
+  color: inherit;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 /* ------------------------------ */

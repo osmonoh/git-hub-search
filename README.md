@@ -1,3 +1,18 @@
+# GitHub repository search
+
+This is my solution of the Frontend coding challenge. It is a GitHub repository search.
+
+It is created with create-react-app.
+
+create-react-app
+axios
+react-icons
+react-router-dom
+
+vanilla css
+
+context api
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
