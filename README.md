@@ -23,11 +23,11 @@ On initial search the number of displayed repos is limited to 5, however a 'More
 
 Quality score is a number representing the quality of the repository. The formula to calculate the repo quality is following:
 
-`(number of stars + number of watchers + number of forks)`
+`(number_of_stars + number_of_watchers + number_of_forks)`
 
 divided by
 
-`(1 + time since last update + number of open issues)`
+`(1 + time_since_last_update + number_of_open_issues)`
 
 Once a repo card is clicked, the user is redirected to a new page with the owner's account information. This info includes user's:
 
