@@ -17,6 +17,7 @@ const Search = () => {
   const [totalPages, setTotalPages] = useState(0);
 
   const onPageLoad = async () => {
+    if (repos.length) return;
     if (!term) setTerm(lastTerm);
     setLoading(true);
     const response = await gitHub.get("/search/repositories", {
