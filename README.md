@@ -6,7 +6,7 @@ It is a simple single page application called 'GitHub repository search'. It ena
 
 This project is created with **create-react-app** and it is making use of the **GitHub REST API**. HTTP client **Axios** is used to fetch the data, **Context API** for state management, **react-router-dom** for navigation and **CSS** along with **react-icons** to style the application. GitHub repository search is deployed on **Netlify**.
 
-You can see the live preview [here](https://git-hub-repo-search.netlify.app/).
+You can see live preview [here](https://git-hub-repo-search.netlify.app/).
 
 ---
 
@@ -23,11 +23,11 @@ On initial search the number of displayed repos is limited to 5, however a 'More
 
 Quality score is a number representing the quality of the repository. The formula to calculate the repo quality is following:
 
-`(number of stars + number of watchers + number of forks)`
+`(number_of_stars + number_of_watchers + number_of_forks)`
 
 divided by
 
-`(1 + time since last update + number of open issues)`
+`(1 + time_since_last_update + number_of_open_issues)`
 
 Once a repo card is clicked, the user is redirected to a new page with the owner's account information. This info includes user's:
 
