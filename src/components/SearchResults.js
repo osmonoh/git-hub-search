@@ -89,7 +89,7 @@ const Search = () => {
             >
               {<VscChromeClose />}
             </button>
-            <span>|</span>
+            <span className="divider"></span>
             <button className="btn-search" type="submit">
               {<GoSearch />}
             </button>
