@@ -12,9 +12,8 @@ const Search = () => {
   const { lastTerm, setLastTerm } = useContext(MyContext);
   const { repos, setRepos } = useContext(MyContext);
   const { count, setCount } = useContext(MyContext);
-
-  const [page, setPage] = useState(2);
-  const [totalPages, setTotalPages] = useState(0);
+  const { page, setPage } = useContext(MyContext);
+  const { totalPages, setTotalPages } = useContext(MyContext);
 
   const onPageLoad = async () => {
     if (repos.length) return;

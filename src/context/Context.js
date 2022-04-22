@@ -8,6 +8,8 @@ const Context = ({ children }) => {
   );
   const [repos, setRepos] = useState([]);
   const [count, setCount] = useState(null);
+  const [page, setPage] = useState(2);
+  const [totalPages, setTotalPages] = useState(0);
   const [account, setAccount] = useState(
     JSON.parse(sessionStorage.getItem("account")) || {}
   );
@@ -23,6 +25,10 @@ const Context = ({ children }) => {
         setRepos,
         count,
         setCount,
+        page,
+        setPage,
+        totalPages,
+        setTotalPages,
         account,
         setAccount,
       }}
