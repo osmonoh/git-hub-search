@@ -30,6 +30,7 @@ const Repo = ({ repo }) => {
   }, [repo]);
 
   const onRepoClick = async (owner) => {
+    setAccount({});
     const response = await gitHub.get(`/users/${owner}`);
 
     setAccount(response.data);

@@ -8,6 +8,7 @@ import { VscChromeClose } from "react-icons/vsc";
 
 const Search = () => {
   const [loading, setLoading] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
   const { term, setTerm } = useContext(MyContext);
   const { lastTerm, setLastTerm } = useContext(MyContext);
   const { repos, setRepos } = useContext(MyContext);
@@ -55,6 +56,7 @@ const Search = () => {
   };
 
   const onMoreResultsClick = async () => {
+    setLoadingMore(true);
     const response = await gitHub.get("/search/repositories", {
       params: {
         q: term,
@@ -63,6 +65,7 @@ const Search = () => {
     });
     setRepos([...repos, ...response.data.items]);
     setPage(page + 1);
+    setLoadingMore(false);
   };
 
   // console.log(repos);
@@ -114,7 +117,7 @@ const Search = () => {
           className="btn-more-results"
           onClick={() => onMoreResultsClick()}
         >
-          More results
+          {loadingMore ? "Loading..." : "More results"}
         </button>
       )}
     </div>
